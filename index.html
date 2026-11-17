@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Лабораторная №4 — AR.js</title>
+    <title>AR Gallery — ABBASOV</title>
 
     <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.7/aframe/build/aframe-ar.js"></script>
@@ -17,22 +17,38 @@
     <a-scene
         embedded
         vr-mode-ui="enabled: false"
+        renderer="colorManagement: true"
         arjs="sourceType: webcam; debugUIEnabled: false;">
 
-        <!-- Маркер Hiro -->
+        <!-- Загрузка модели -->
+        <a-assets>
+            <a-asset-item
+                id="gallery"
+                src="models/lab3.glb">
+            </a-asset-item>
+        </a-assets>
+
+        <!-- Привязка модели к маркеру Hiro -->
         <a-marker preset="hiro">
 
-            <!-- Куб над маркером -->
-            <a-box
-                position="0 0.5 0"
-                width="1"
-                height="1"
-                depth="1"
-                color="#4CC3D9"
-                material="opacity: 0.85">
-            </a-box>
+            <a-entity
+                gltf-model="#gallery"
+                position="0 0.02 0"
+                rotation="0 0 0"
+                scale="0.1 0.1 0.1">
+            </a-entity>
 
         </a-marker>
+
+        <!-- Освещение -->
+        <a-entity
+            light="type: ambient; intensity: 0.8">
+        </a-entity>
+
+        <a-entity
+            light="type: directional; intensity: 1.2"
+            position="-3 8 5">
+        </a-entity>
 
         <!-- Камера -->
         <a-entity camera></a-entity>
